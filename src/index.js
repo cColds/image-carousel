@@ -24,11 +24,15 @@ function displayNewImage(imageIndex) {
 	newImage.classList.add("selected");
 }
 
-function handleLeftArrow() {
+function getLastImageIndex() {
 	const images = document.querySelectorAll(".image-frame li");
+	const imageLength = images.length - 1;
+	return imageLength;
+}
 
+function handleLeftArrow() {
 	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
-	const lastImageIndex = images.length - 1;
+	const lastImageIndex = getLastImageIndex();
 
 	hideCurrentImage();
 	unselectCurrentDot();
@@ -43,10 +47,8 @@ function handleLeftArrow() {
 }
 
 function handleRightArrow() {
-	const images = document.querySelectorAll(".image-frame li");
-
 	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
-	const lastImageIndex = images.length - 1;
+	const lastImageIndex = getLastImageIndex();
 
 	hideCurrentImage();
 	unselectCurrentDot();
@@ -78,3 +80,18 @@ const slideDots = document.querySelector(".slide-dots");
 leftArrow.addEventListener("click", handleLeftArrow);
 rightArrow.addEventListener("click", handleRightArrow);
 slideDots.addEventListener("click", handleSlideDots);
+
+setInterval(() => {
+	const currentIndex = +getCurrentImage().dataset.imageIndex;
+
+	hideCurrentImage();
+	unselectCurrentDot();
+
+	if (currentIndex === getLastImageIndex()) {
+		displayNewImage(0);
+		selectNewDot(0);
+	} else {
+		displayNewImage(currentIndex + 1);
+		selectNewDot(currentIndex + 1);
+	}
+}, 5000);
