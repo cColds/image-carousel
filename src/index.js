@@ -30,7 +30,7 @@ function getLastImageIndex() {
 	return imageLength;
 }
 
-function handleLeftArrow() {
+function changeImage(moveByOne) {
 	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
 	const lastImageIndex = getLastImageIndex();
 
@@ -41,31 +41,18 @@ function handleLeftArrow() {
 		displayNewImage(lastImageIndex);
 		selectNewDot(lastImageIndex);
 	} else {
-		displayNewImage(currentImageIndex - 1);
-		selectNewDot(currentImageIndex - 1);
+		displayNewImage(currentImageIndex + moveByOne);
+		selectNewDot(currentImageIndex + moveByOne);
 	}
 }
 
-function handleRightArrow() {
-	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
-	const lastImageIndex = getLastImageIndex();
+const moveImageBack = () => changeImage(-1);
+const moveImageForward = () => changeImage(1);
 
-	hideCurrentImage();
-	unselectCurrentDot();
+function handleSlideDots({ target }) {
+	if (target.className === "slide-dots") return;
 
-	if (currentImageIndex === lastImageIndex) {
-		displayNewImage(0);
-		selectNewDot(0);
-	} else {
-		displayNewImage(currentImageIndex + 1);
-		selectNewDot(currentImageIndex + 1);
-	}
-}
-
-function handleSlideDots(e) {
-	if (e.target.className === "slide-dots") return;
-
-	const dotSelectedIndex = +e.target.closest("li").dataset.dotIndex;
+	const dotSelectedIndex = +target.closest("li").dataset.dotIndex;
 
 	unselectCurrentDot();
 	selectNewDot(dotSelectedIndex);
@@ -92,8 +79,8 @@ const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 const slideDots = document.querySelector(".slide-dots");
 
-leftArrow.addEventListener("click", handleLeftArrow);
-rightArrow.addEventListener("click", handleRightArrow);
+leftArrow.addEventListener("click", moveImageBack);
+rightArrow.addEventListener("click", moveImageForward);
 slideDots.addEventListener("click", handleSlideDots);
 
 setInterval(handleProgressBar, 5000);
