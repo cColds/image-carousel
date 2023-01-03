@@ -21,11 +21,12 @@
 
                 <ul class="image-frame">
                     <li class="selected" data-image-index="0"> <img src="./images/mountain-lake.jpg"
-                            alt="mountain and lake" draggable="false">
+                            alt="mountain and lake" draggable="false" (dragstart)="false;">
                     </li>
-                    <li data-image-index="1"> <img src="./images/waterfall.jpg" alt="waterfall" draggable="false"> </li>
+                    <li data-image-index="1"> <img src="./images/waterfall.jpg" alt="waterfall" draggable="false"
+                            (dragstart)="false;"> </li>
                     <li data-image-index="2"> <img src="./images/northern-lights.jpg" alt="northern lights"
-                            draggable="false"> </li>
+                            draggable="false" (dragstart)="false;"> </li>
 
                     <div class="progress-bar">
                         <span class="progress-percentage"></span>
