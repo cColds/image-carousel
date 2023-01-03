@@ -85,7 +85,7 @@ li.selected img {
 }
 
 .progress-percentage {
-	background-color: #0ea5e9;
+	background-color: #3b82f6;
 	border-radius: 5px;
 	animation: progress-bar 5s linear infinite;
 }
