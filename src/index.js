@@ -53,7 +53,7 @@ function handleRightArrow() {
 
 	if (currentImageIndex === lastImageIndex) {
 		displayNewImage(0);
-		selectNewDot(lastImageIndex);
+		selectNewDot(0);
 	} else {
 		displayNewImage(currentImageIndex + 1);
 		selectNewDot(currentImageIndex + 1);
