@@ -12,8 +12,9 @@ function unselectCurrentDot() {
 	currentDot.classList.remove("selected");
 }
 
-function selectNewDot(e) {
-	e.target.closest("li").classList.add("selected");
+function selectNewDot(dotIndex) {
+	const newDot = document.querySelector(`[data-dot-index='${dotIndex}']`);
+	newDot.classList.add("selected");
 }
 
 function displayNewImage(imageIndex) {
@@ -30,11 +31,14 @@ function handleLeftArrow() {
 	const lastImageIndex = images.length - 1;
 
 	hideCurrentImage();
+	unselectCurrentDot();
 
 	if (currentImageIndex === 0) {
 		displayNewImage(lastImageIndex);
+		selectNewDot(lastImageIndex);
 	} else {
 		displayNewImage(currentImageIndex - 1);
+		selectNewDot(currentImageIndex - 1);
 	}
 }
 
@@ -45,11 +49,14 @@ function handleRightArrow() {
 	const lastImageIndex = images.length - 1;
 
 	hideCurrentImage();
+	unselectCurrentDot();
 
 	if (currentImageIndex === lastImageIndex) {
 		displayNewImage(0);
+		selectNewDot(lastImageIndex);
 	} else {
 		displayNewImage(currentImageIndex + 1);
+		selectNewDot(currentImageIndex + 1);
 	}
 }
 
@@ -65,7 +72,7 @@ slideDots.addEventListener("click", (e) => {
 	const dotSelectedIndex = +e.target.closest("li").dataset.dotIndex;
 
 	unselectCurrentDot();
-	selectNewDot(e);
+	selectNewDot(dotSelectedIndex);
 	hideCurrentImage();
 	displayNewImage(dotSelectedIndex);
 });
