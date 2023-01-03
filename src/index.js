@@ -73,15 +73,7 @@ function handleSlideDots(e) {
 	displayNewImage(dotSelectedIndex);
 }
 
-const leftArrow = document.querySelector(".left-arrow");
-const rightArrow = document.querySelector(".right-arrow");
-const slideDots = document.querySelector(".slide-dots");
-
-leftArrow.addEventListener("click", handleLeftArrow);
-rightArrow.addEventListener("click", handleRightArrow);
-slideDots.addEventListener("click", handleSlideDots);
-
-setInterval(() => {
+function handleProgressBar() {
 	const currentIndex = +getCurrentImage().dataset.imageIndex;
 
 	hideCurrentImage();
@@ -94,4 +86,14 @@ setInterval(() => {
 		displayNewImage(currentIndex + 1);
 		selectNewDot(currentIndex + 1);
 	}
-}, 5000);
+}
+
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+const slideDots = document.querySelector(".slide-dots");
+
+leftArrow.addEventListener("click", handleLeftArrow);
+rightArrow.addEventListener("click", handleRightArrow);
+slideDots.addEventListener("click", handleSlideDots);
+
+setInterval(handleProgressBar, 5000);
