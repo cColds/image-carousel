@@ -1,33 +1,64 @@
-const progressPercentage = document.querySelector(".progress-percentage");
+function getCurrentImage() {
+	const currentImage = document.querySelector(".selected");
+	return currentImage;
+}
 
-// change img to the next (right) image every 5 seconds
+function hideCurrentImage() {
+	getCurrentImage().classList.remove("selected");
+}
 
-// setInterval(() => {
-// 	console.log(progressPercentage.clientWidth);
-// }, 5000);
+function displayNewImage(newImage) {
+	newImage.classList.add("selected");
+}
+
+// function handleImageChange() {
+//     const images = document.querySelectorAll(".image-frame li");
+
+// 	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
+// 	const lastImageIndex = images.length - 1;
+
+// 	hideCurrentImage();
+
+// 	if (currentImageIndex === 0) {
+// 		displayNewImage(images[lastImageIndex]);
+// 	} else {
+// 		displayNewImage(images[currentImageIndex - 1]);
+// 	}
+
+// }
+
+function handleLeftArrow() {
+	const images = document.querySelectorAll(".image-frame li");
+
+	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
+	const lastImageIndex = images.length - 1;
+
+	hideCurrentImage();
+
+	if (currentImageIndex === 0) {
+		displayNewImage(images[lastImageIndex]);
+	} else {
+		displayNewImage(images[currentImageIndex - 1]);
+	}
+}
+
+function handleRightArrow() {
+	const images = document.querySelectorAll(".image-frame li");
+
+	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
+	const lastImageIndex = images.length - 1;
+
+	hideCurrentImage();
+
+	if (currentImageIndex === lastImageIndex) {
+		displayNewImage(images[0]);
+	} else {
+		displayNewImage(images[currentImageIndex + 1]);
+	}
+}
 
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 
-leftArrow.addEventListener("click", () => {
-	console.log("jim");
-});
-
-// unselect current img
-
-// reselect new img
-
-// assume default is index 0 (selected - cat), 1 (dog), 2 (fish)
-
-// if left arrow clicked, move cat and dog up one index,
-// and move fish down one index because it's the last index
-
-// left arrow clicked = index 0 (selected - fish), 1 (cat), 2 (dog)
-
-// if right arrow clicked, move cat and dog down one index,
-// and move cat to the last index because it's the first index,
-// and we don't want to go to a negative index
-
-// right arrow clicked = index 0 (selected - dog), 1 (fish), 2 (cat)
-
-// when slide dot clicked, change to the new image
+leftArrow.addEventListener("click", handleLeftArrow);
+rightArrow.addEventListener("click", handleRightArrow);
