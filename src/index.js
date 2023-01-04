@@ -30,60 +30,54 @@ function getLastImageIndex() {
 	return imageLength;
 }
 
-function changeImage(moveByOne) {
-	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
-	const lastImageIndex = getLastImageIndex();
+function imageIndexToMoveBy(
+	currentImageIndex,
+	lastImageIndex,
+	moveByOne,
+	dotSelectedIndex
+) {
+	if (dotSelectedIndex != null) {
+		displayNewImage(dotSelectedIndex);
+		selectNewDot(dotSelectedIndex);
+		return;
+	}
 
-	hideCurrentImage();
-	unselectCurrentDot();
-
-	if (currentImageIndex === 0) {
+	if (currentImageIndex === 0 && moveByOne === -1) {
 		displayNewImage(lastImageIndex);
 		selectNewDot(lastImageIndex);
-	} else if (currentImageIndex === 0) {
-		displayNewImage(lastImageIndex);
-		selectNewDot(lastImageIndex);
+	} else if (currentImageIndex === lastImageIndex) {
+		displayNewImage(0);
+		selectNewDot(0);
 	} else {
 		displayNewImage(currentImageIndex + moveByOne);
 		selectNewDot(currentImageIndex + moveByOne);
 	}
 }
 
-const moveImageBack = () => changeImage(-1);
-const moveImageForward = () => changeImage(1);
-
-function handleSlideDots({ target }) {
-	if (target.className === "slide-dots") return;
-
-	const dotSelectedIndex = +target.closest("li").dataset.dotIndex;
-
-	unselectCurrentDot();
-	selectNewDot(dotSelectedIndex);
-	hideCurrentImage();
-	displayNewImage(dotSelectedIndex);
-}
-
-function handleProgressBar() {
-	const currentIndex = +getCurrentImage().dataset.imageIndex;
+function changeImage(moveByOne, dotSelectedIndex) {
+	const currentImageIndex = +getCurrentImage().dataset.imageIndex;
+	const lastImageIndex = getLastImageIndex();
 
 	hideCurrentImage();
 	unselectCurrentDot();
-
-	if (currentIndex === getLastImageIndex()) {
-		displayNewImage(0);
-		selectNewDot(0);
-	} else {
-		displayNewImage(currentIndex + 1);
-		selectNewDot(currentIndex + 1);
-	}
+	imageIndexToMoveBy(
+		currentImageIndex,
+		lastImageIndex,
+		moveByOne,
+		dotSelectedIndex
+	);
 }
 
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 const slideDots = document.querySelector(".slide-dots");
 
-leftArrow.addEventListener("click", moveImageBack);
-rightArrow.addEventListener("click", moveImageForward);
-slideDots.addEventListener("click", handleSlideDots);
+leftArrow.addEventListener("click", () => changeImage(-1));
+rightArrow.addEventListener("click", () => changeImage(1));
+slideDots.addEventListener("click", (e) => {
+	if (e.target.className === "slide-dots") return;
+	const dotSelectedIndex = e.target.closest("li").dataset.dotIndex;
+	changeImage("", dotSelectedIndex);
+});
 
-setInterval(handleProgressBar, 5000);
+setInterval(() => changeImage(1), 5000);
