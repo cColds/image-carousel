@@ -40,6 +40,9 @@ function changeImage(moveByOne) {
 	if (currentImageIndex === 0) {
 		displayNewImage(lastImageIndex);
 		selectNewDot(lastImageIndex);
+	} else if (currentImageIndex === 0) {
+		displayNewImage(lastImageIndex);
+		selectNewDot(lastImageIndex);
 	} else {
 		displayNewImage(currentImageIndex + moveByOne);
 		selectNewDot(currentImageIndex + moveByOne);
