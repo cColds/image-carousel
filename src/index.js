@@ -30,12 +30,24 @@ function getLastImageIndex() {
 	return imageLength;
 }
 
+function resetProgressPercentage() {
+	const progressPercentage = document.querySelector(".progress-percentage");
+
+	progressPercentage.style.animation = "none";
+	progressPercentage.offsetHeight; /* trigger reflow */
+	progressPercentage.style.animation = null;
+}
+
 function imageIndexToMoveBy(
 	currentImageIndex,
 	lastImageIndex,
 	moveByOne,
 	dotSelectedIndex
 ) {
+	clearInterval(startTimer);
+	startTimer = setInterval(() => changeImage(1), 5000);
+	resetProgressPercentage();
+
 	if (dotSelectedIndex != null) {
 		displayNewImage(dotSelectedIndex);
 		selectNewDot(dotSelectedIndex);
@@ -79,4 +91,4 @@ slideDots.addEventListener("click", (e) => {
 	changeImage("", dotSelectedIndex);
 });
 
-setInterval(() => changeImage(1), 5000);
+let startTimer = setInterval(() => changeImage(1), 5000);
