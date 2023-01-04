@@ -41,7 +41,6 @@ function imageIndexToMoveBy(
 		selectNewDot(dotSelectedIndex);
 		return;
 	}
-
 	if (currentImageIndex === 0 && moveByOne === -1) {
 		displayNewImage(lastImageIndex);
 		selectNewDot(lastImageIndex);

@@ -54,14 +54,14 @@ body {
 }
 
 .image-frame li {
-	/* display: none; */
 	transform: translateX(-100%) scale(0.1);
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 50%;
-	transition: 0.3s ease-in;
+	opacity: 0.5;
+	transition: 0.5s;
 	pointer-events: none;
 	visibility: hidden;
 }
@@ -73,19 +73,10 @@ body {
 	border-radius: 5px;
 	pointer-events: none;
 }
-/* 
-.image-frame li:nth-child(even) {
-	transform: translateX(100%) scale(0.1);
-}
-
-.image-frame li:nth-child(odd) {
-	transform: translateX(-100%) scale(0.1);
-} */
 
 .image-frame li.selected {
 	opacity: 1;
 	position: static;
-	display: block;
 	animation: fadeInOpacity 0.5s forwards;
 	transform: translateX(0) scale(1);
 	visibility: visible;
