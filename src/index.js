@@ -44,10 +44,6 @@ function imageIndexToMoveBy(
 	moveByOne,
 	dotSelectedIndex
 ) {
-	clearInterval(startTimer);
-	startTimer = setInterval(() => changeImage(1), 5000);
-	resetProgressPercentage();
-
 	if (dotSelectedIndex != null) {
 		displayNewImage(dotSelectedIndex);
 		selectNewDot(dotSelectedIndex);
@@ -77,6 +73,9 @@ function changeImage(moveByOne, dotSelectedIndex) {
 		moveByOne,
 		dotSelectedIndex
 	);
+	clearInterval(startTimer);
+	startTimer = setInterval(() => changeImage(1), 5000);
+	resetProgressPercentage();
 }
 
 const leftArrow = document.querySelector(".left-arrow");
