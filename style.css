@@ -1,3 +1,7 @@
+--root {
+	--progress-width: 100%;
+}
+
 /* GENERAL STYLES */
 html,
 body {
@@ -102,6 +106,8 @@ body {
 .progress-percentage {
 	background-color: #3b82f6;
 	border-radius: 5px;
+	animation: 0;
+	width: 0;
 	animation: progress-bar 5s linear infinite;
 }
 
