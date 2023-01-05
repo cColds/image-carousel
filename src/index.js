@@ -42,7 +42,7 @@ function resetProgressPercentage() {
 }
 
 function toggleTranslateDirection(el, newDirection, moveByOne) {
-	let currentDirection = moveByOne === -1 ? "left" : "right";
+	const currentDirection = moveByOne === -1 ? "left" : "right";
 
 	el.classList.remove(currentDirection);
 	el.classList.add(newDirection);
