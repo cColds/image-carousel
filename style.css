@@ -42,6 +42,12 @@ body {
 	place-items: center;
 }
 
+/* MAIN */
+
+main {
+	/* overflow: hidden; */
+}
+
 /* IMAGES */
 
 .image-container {
@@ -55,10 +61,10 @@ body {
 	width: clamp(200px, 75vw, 1200px);
 	height: 500px;
 	position: relative;
+	overflow: hidden;
 }
 
 .image-frame li {
-	transform: translateX(-100%) scale(0.1);
 	width: 100%;
 	height: 100%;
 	position: absolute;
