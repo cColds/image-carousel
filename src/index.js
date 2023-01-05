@@ -52,6 +52,7 @@ function translateImage(moveByOne) {
 	const translateXLeft = document.querySelector(".left");
 	const translateXRight = document.querySelector(".right");
 
+	// if the same class is gonna be added and removed, return
 	if (
 		(moveByOne === -1 && translateXRight) ||
 		(moveByOne === 1 && translateXLeft)
@@ -59,6 +60,8 @@ function translateImage(moveByOne) {
 		return;
 	}
 
+	// if moving up 1 (right), translate image left
+	// else if moving down 1 (left), translate image right
 	if (moveByOne === 1) {
 		getAllImages().forEach((el) =>
 			toggleTranslateDirection(el, "left", moveByOne)
