@@ -24,9 +24,12 @@ function displayNewImage(imageIndex) {
 	newImage.classList.add("selected");
 }
 
+function getAllImages() {
+	return document.querySelectorAll(".image-frame li");
+}
+
 function getLastImageIndex() {
-	const images = document.querySelectorAll(".image-frame li");
-	const imageLength = images.length - 1;
+	const imageLength = getAllImages().length - 1;
 	return imageLength;
 }
 
@@ -36,6 +39,34 @@ function resetProgressPercentage() {
 	progressPercentage.style.animation = "none";
 	progressPercentage.offsetHeight; /* trigger reflow */
 	progressPercentage.style.animation = null;
+}
+
+// check if class contain left or right and loop remove all
+// add left or right class depending clicked
+// remove left or right class for the new img
+
+function toggleTranslateDirection(el, newDirection, leftDirection) {
+	let currentDirection = leftDirection ? "left" : "right";
+
+	el.classList.remove(currentDirection);
+	el.classList.add(newDirection);
+}
+
+function translateImage(moveByOne) {
+	const translateXLeft = document.querySelector(".left");
+	const translateXRight = document.querySelector(".right");
+
+	if (translateXLeft && translateXRight == null) return;
+
+	if (moveByOne === 1) {
+		getAllImages().forEach((el) =>
+			toggleTranslateDirection(el, "left", translateXLeft)
+		);
+	} else if (moveByOne === -1) {
+		getAllImages().forEach((el) =>
+			toggleTranslateDirection(el, "right", translateXLeft)
+		);
+	}
 }
 
 function imageIndexToMoveBy(
@@ -52,7 +83,7 @@ function imageIndexToMoveBy(
 	if (currentImageIndex === 0 && moveByOne === -1) {
 		displayNewImage(lastImageIndex);
 		selectNewDot(lastImageIndex);
-	} else if (currentImageIndex === lastImageIndex) {
+	} else if (currentImageIndex === lastImageIndex && moveByOne === 1) {
 		displayNewImage(0);
 		selectNewDot(0);
 	} else {
@@ -76,6 +107,7 @@ function changeImage(moveByOne, dotSelectedIndex) {
 	clearInterval(startTimer);
 	startTimer = setInterval(() => changeImage(1), 5000);
 	resetProgressPercentage();
+	// translateImage(moveByOne);
 }
 
 const leftArrow = document.querySelector(".left-arrow");

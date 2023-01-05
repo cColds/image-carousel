@@ -70,6 +70,14 @@ body {
 	visibility: hidden;
 }
 
+.image-frame li.left {
+	transform: translateX(-100%) scale(0.1);
+}
+
+.image-frame li.right {
+	transform: translateX(100%) scale(0.1);
+}
+
 .image-frame li img {
 	object-fit: cover;
 	width: 100%;
